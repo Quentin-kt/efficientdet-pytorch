@@ -21,8 +21,8 @@ saveBasePath=r"./VOCdevkit/VOC2007/ImageSets/Main/"
 #   想要增加测试集修改trainval_percent
 #   train_percent不需要修改
 #----------------------------------------------------------------------#
-trainval_percent=1
-train_percent=1
+trainval_percent=0.9
+train_percent=0.9
 
 temp_xml = os.listdir(xmlfilepath)
 total_xml = []
