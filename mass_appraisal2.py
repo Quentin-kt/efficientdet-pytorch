@@ -21,11 +21,11 @@ def alter(file, old_str, new_str):
 # 批量评估的起始点
 start_idx = 1
 end_idx = 100
-frcnn_path = r"./frcnn.py"
+efficientdet_path = r"./efficientdet.py"
 appraisal_path = r"./appraisal.py"
 new_pth = "Epoch" + str(start_idx) + ".pth"
 new_result = 'results/results_' + str(start_idx)
-alter(frcnn_path, 'Epoch1.pth', new_pth)
+alter(efficientdet_path, 'Epoch1.pth', new_pth)
 alter(appraisal_path, 'results/results_1', new_result)
 
 """
@@ -43,9 +43,9 @@ for idx in range(start_idx, end_idx + 1):
     os.system("python ./get_dr_txt.py")
     os.system("python ./get_gt_txt.py")
     os.system("python ./appraisal.py")
-    alter(frcnn_path, old_pth, new_pth)
+    alter(efficientdet_path, old_pth, new_pth)
     alter(appraisal_path, old_result, new_result)
-alter(frcnn_path, 'Epoch' + str(end_idx + 1) + '.pth', 'Epoch1.pth')
+alter(efficientdet_path, 'Epoch' + str(end_idx + 1) + '.pth', 'Epoch1.pth')
 alter(appraisal_path, 'results/results_' + str(end_idx + 1), 'results/results_1')
 
 """
