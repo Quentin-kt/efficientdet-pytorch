@@ -50,7 +50,7 @@ class mAP_EfficientDet(EfficientDet):
     def detect_image(self,image_id,image):
         self.confidence = 0.01
         self.iou = 0.5
-        f = open("./input/detection-results/"+image_id+".txt","w") 
+        f = open("./input/input_1/detection-results/"+image_id+".txt","w")
         image_shape = np.array(np.shape(image)[0:2])
         #---------------------------------------------------------#
         #   给图像增加灰条，实现不失真的resize
@@ -114,17 +114,17 @@ image_ids = open('VOCdevkit/VOC2007/ImageSets/Main/test.txt').read().strip().spl
 
 if not os.path.exists("./input"):
     os.makedirs("./input")
-if not os.path.exists("./input/detection-results"):
-    os.makedirs("./input/detection-results")
-if not os.path.exists("./input/images-optional"):
-    os.makedirs("./input/images-optional")
+if not os.path.exists("./input/input_1/detection-results"):
+    os.makedirs("./input/input_1/detection-results")
+if not os.path.exists("./input/input_1/images-optional"):
+    os.makedirs("./input/input_1/images-optional")
 
 
 for image_id in tqdm(image_ids):
     image_path = "./VOCdevkit/VOC2007/JPEGImages/"+image_id+".jpg"
     image = Image.open(image_path)
     # 开启后在之后计算mAP可以可视化
-    # image.save("./input/images-optional/"+image_id+".jpg")
+    # image.save("./input/input_1/images-optional/"+image_id+".png")
     efficientdet.detect_image(image_id,image)
     
 

@@ -48,8 +48,8 @@ if args.set_class_iou is not None:
 os.chdir(os.path.dirname(os.path.abspath(__file__)))
 
 GT_PATH = os.path.join(os.getcwd(), 'input', 'ground-truth')
-DR_PATH = os.path.join(os.getcwd(), 'input', 'detection-results')
-IMG_PATH = os.path.join(os.getcwd(), 'input', 'images-optional')
+DR_PATH = os.path.join(os.getcwd(), 'input/input_1', 'detection-results')
+IMG_PATH = os.path.join(os.getcwd(), 'input/input_1', 'images-optional')
 
 # 检查images-optional文件夹是否存在
 if os.path.exists(IMG_PATH):

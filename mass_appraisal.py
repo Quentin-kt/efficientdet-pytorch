@@ -21,33 +21,29 @@ def alter(file, old_str, new_str):
 # 批量评估的起始点
 start_idx = 1
 end_idx = 100
-efficientdet_path = r"./efficientdet.py"
 get_map_path = r"./get_map.py"
-new_pth = "Epoch" + str(start_idx) + ".pth"
+new_input = 'input/input_' + str(start_idx)
 new_result = 'results/results_' + str(start_idx)
-alter(efficientdet_path, 'Epoch1.pth', new_pth)
 alter(get_map_path, 'results/results_1', new_result)
+alter(get_map_path, 'input/input_1', new_input)
 if os.path.exists("results"):  # if it exist already
     shutil.rmtree("results")
 
 """
 批量评估
 """
+os.system("python ./get_gt_txt.py")
 for idx in range(start_idx, end_idx + 1):
-    if os.path.exists("input"):  # if it exist already
-        shutil.rmtree("input")
-    old_pth = "Epoch" + str(idx) + ".pth"
-    new_pth = "Epoch" + str(idx + 1) + ".pth"
+    old_input = 'input/input_' + str(idx)
+    new_input = 'input/input_' + str(idx + 1)
     old_result = 'results/results_' + str(idx)
     new_result = 'results/results_' + str(idx + 1)
     print('###############################################')
     print('第' + str(idx) + '次评估')
-    os.system("python ./get_dr_txt.py")
-    os.system("python ./get_gt_txt.py")
     os.system("python ./get_map.py")
-    alter(efficientdet_path, old_pth, new_pth)
+    alter(get_map_path, old_input, new_input)
     alter(get_map_path, old_result, new_result)
-alter(efficientdet_path, 'Epoch' + str(end_idx + 1) + '.pth', 'Epoch1.pth')
+alter(get_map_path, 'input/input_' + str(end_idx + 1), 'input/input_1')
 alter(get_map_path, 'results/results_' + str(end_idx + 1), 'results/results_1')
 
 """
@@ -68,7 +64,7 @@ for idx in range(1, end_idx - start_idx + 2):
             if key_str in line:
                 # 将map结果写入txt文件
                 with open(map_summary_path, "a", encoding="utf-8") as map_summary_txt:
-                    map_summary_txt.write('Epoch' + str(idx) + '_' + line)
+                    map_summary_txt.write('Epoch' + str(real_idx) + '_' + line)
                 map_list.append(line)
                 map_list[idx - 1] = map_list[idx - 1].strip('mAP = ')
                 map_list[idx - 1] = map_list[idx - 1].strip('%\n')
