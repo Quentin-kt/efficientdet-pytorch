@@ -37,7 +37,7 @@ def file_lines_to_tensor(dir_path, whether_confidence):
  评估
     损失函数——多标签二分类交叉熵（Binary Cross Entropy）
 """
-detection = file_lines_to_tensor(r'input/detection-results', True)
+detection = file_lines_to_tensor(r'input/input_1/detection-results', True)
 truth = file_lines_to_tensor(r'input/ground-truth', False)
 loss = torch.nn.BCELoss()
 total_loss = float(loss(detection, truth))
